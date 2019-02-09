@@ -1,0 +1,32 @@
+* Class AB amplifier with 2 diodes and complementary BJT pair.
+
+Vcc 5 0 12
+Vss nvss 0 -12
+
+* I0 3 5 100u
+R0 3 5 1e3
+
+
+D1 3 2 
+D2 2 1
+
+Vg 1 0 sin(-0.7 1 1e3)
+
+Q1 5 3 6 gnpn
+Q2 nvss 1 6 gpnp
+
+Rp 6 0 50
+
+
+Rshort0 6 vOUT 0
+Rshort1 1 vIN 0
+
+.model gnpn npn
+.model gpnp pnp
+
+.tran 0.01ms 5.0ms 0.0ms 
+.save all @Q1[ib] @Q2[ib]
+.control
+run
+plot @Q2[ib] vs vOUT, @Q1[ib] vs vOUT
+plot vOUT vs vIN
