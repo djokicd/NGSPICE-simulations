@@ -1,0 +1,25 @@
+* Inverting amplifier circuit
+Vg nP 0 SIN(0 10 1k 0 0)
+Rp 0 nI 1k
+D1 nOP nI
+XOP nP nI nOP OPAMP1
+
+.subckt OPAMP1      1   2   6
+* Input resistance
+Rin	1	2	10MEG
+* Gain (100K) and single pole (10HZ)
+E0	3 0	1 2	100K
+Rp1	3	4	1K
+* Cp1	4	0	100n
+* Output unity buffer and output resistance
+Ebuf	5 0	4 0	1.00
+Rout	5	6	10
+.ends
+
+.control
+tran 1us 2.0ms 0.0ms 
+* dc Vg -5 5 0.01
+run
+plot nI
+.endc
+

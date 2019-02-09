@@ -1,0 +1,21 @@
+* Common emitter amplifier
+
+Vcc 5 0 12
+
+Vg  1 0 ac 1.0 SIN(0 1mV 1k 0 0)
+C1  1 2 10u
+
+RA 5 2 100k 
+RB 2 0 24k
+
+RC 5 4 3.9k
+RE 6 0 1k
+
+Q1 4 2 6 generic
+
+.model generic npn
+
+.control
+tran 0.01ms 5.0ms 0.0ms 
+run
+plot v(4)-mean(v(4)) v(1)

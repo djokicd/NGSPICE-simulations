@@ -1,0 +1,27 @@
+* Inverting amplifier circuit
+Vg 1 0 1
+R1 1 nP 10k
+R2 nP nOUT 1k
+Ro 0 nM 1k
+XOP nP nM nOUT OPAMP1 
+
+.subckt OPAMP1      1   2   6
+* Input resistance
+RIN	1	2	10MEG
+* Gain (100K) and single pole (10HZ)
+EGAIN	3 0	1 2	100K
+RP1	3	4	1K
+CP1	4	0	15.915UF
+* Output unity buffet and output resistance
+EBUFFER	5 0	4 0	1
+ROUT	5	6	10
+.ends
+
+.MODEL mydiode D(IS=18.8n RS=0 BV=400 IBV=5u CJO=30 M=0.333 N=2)
+
+.control
+dc Vg -5 5 0.1
+run
+plot nOUT
+.endc
+
