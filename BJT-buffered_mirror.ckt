@@ -1,0 +1,21 @@
+* Buffered current mirror ckt
+
+Vcc 1 0 5
+
+R1 1 2 10k
+Q1 3 2 1 generic
+Q2 0 2 1 generic
+R2 3 0 7.4k
+Q3 0 3 2 generic
+
+.model generic pnp
+
+
+.control
+save all @Q1[ib] @Q2[ib] @Q3[ib]
+dc Vcc 0.0 5.0 0.01
+run
+plot v(2), v(3)
+plot @Q1[ib] @Q2[ib] @Q3[ib]
+
+

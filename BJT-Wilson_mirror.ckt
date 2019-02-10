@@ -1,0 +1,21 @@
+* Buffered current mirror ckt
+
+
+I0 0 1 1m
+Q1 1 2 0 generic
+Q2 3 2 0 generic
+Rshort1 3 2 0
+Q3 4 1 3 generic
+Vout 4 0 5
+
+* Output current into 4
+
+.model generic npn
+
+.control
+save all @Q1[ib] @Q2[ib] @Q3[ib] @Q1[ic] @Q2[ic] @Q3[ic]
+dc Vout 0.0 5.0 0.01
+run
+plot @Q1[ib] @Q2[ib] @Q3[ib]
+plot @Q1[ic] @Q2[ic] @Q3[ic]
+
