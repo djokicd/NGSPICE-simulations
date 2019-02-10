@@ -10,12 +10,12 @@ Q3 0 3 2 generic
 
 .model generic pnp
 
-
 .control
-save all @Q1[ib] @Q2[ib] @Q3[ib]
+save all @Q1[ib] @Q2[ib] @Q3[ib] @Q1[ic] @Q2[ic] Q3[ic]
 dc Vcc 0.0 5.0 0.01
 run
 plot v(2), v(3)
 plot @Q1[ib] @Q2[ib] @Q3[ib]
+plot @Q1[ic] @Q2[ic] @Q2[ic]
 
 

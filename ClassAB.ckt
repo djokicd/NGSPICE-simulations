@@ -3,14 +3,12 @@
 Vcc 5 0 12
 Vss nvss 0 -12
 
-* I0 3 5 100u
 R0 3 5 1e3
-
 
 D1 3 2 
 D2 2 1
 
-Vg 1 0 sin(-0.7 1 1e3)
+Vg 1 0 sin(-0.7 1.0 1e3)
 
 Q1 5 3 6 gnpn
 Q2 nvss 1 6 gpnp

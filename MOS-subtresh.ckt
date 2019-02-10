@@ -1,0 +1,16 @@
+* Mosfet characteristics
+
+Vds 2 0 2.5
+Vgs 1 0 0.5
+
+M1 2 1 0 0 MOSN L=4U W=6U
+
+.model MOSN NMOS VTO=1.0 NSUB=1.0E15 UO=550
+
+.control
+save all @M1[id]
+dc Vds 0 5.0 0.01 Vgs 1.0 1.1 0.01
+run
+plot -i(Vds)
+
+

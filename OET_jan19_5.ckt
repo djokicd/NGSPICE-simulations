@@ -1,0 +1,15 @@
+* OET-Januar19, 3. pitanje. 
+V1 0 1 1
+R1 0 2 1
+R2 0 3 3
+R3 2 3 1
+R4 2 1 1
+Rload 3 1 1
+.dc Rload 0.01 5.00 0.01
+.save all @V1[p] 
+.control
+run
+plot @V1[p]  
+.endc
+.end
+

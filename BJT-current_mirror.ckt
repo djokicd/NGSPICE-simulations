@@ -1,0 +1,24 @@
+* Ordinary current mirror using BJT ckt
+
+.include bc337.ckt
+
+I0 0 1 10m
+Q1 1 2 0 bc337
+Q2 3 2 0 bc337
+Rshort1 1 2 0
+Vout 3 0 2.5
+
+* Output current into 4
+
+.control
+save all @Q1[ib] @Q2[ib] @Q1[ic] @Q2[ic]
+dc Vout 0.0 5.0 0.01
+run
+plot @Q1[ib] 
+plot @Q2[ib] 
+plot @Q1[ic] 
+plot @Q2[ic]
+
+tf i(Vout) Vout
+run
+print transfer_function

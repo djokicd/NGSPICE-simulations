@@ -1,0 +1,10 @@
+* Resistor test
+
+I0 0 Vx 1m
+R Vx 0 1k
+
+.control
+save all
+op
+run
+print v(Vx)
