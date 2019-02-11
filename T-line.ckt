@@ -2,12 +2,14 @@
 
 T1 1 0 2 0 Z0=50 TD=10n
 
-Vg 5 0 PULSE(0 50 0 1p 1p 2n 1000n 0)
+Vg 5 0 PULSE(0 50 0 1p 1p 4n 8n 0)
 R1 5 1 50
-L1 2 0 1u
+L1 2 6 10n
+C1 2 0 10p
+R5 6 0 10
 
 .save all @L1[i]
 .control
-tran 0.1ps 40ns 0ns 
+tran 1ps 40ns 0ns 
 plot v(5) v(1) v(2)
 plot @L1[i]
