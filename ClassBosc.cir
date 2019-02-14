@@ -5,6 +5,7 @@
 
 .model BS170 NMOS VTO=1.824 RG=270 RS=1.572 RD=1.436 RB=.768 KP=.1233 Cgdmax=20p Cgdmin=3p CGS=28p Cjo=35p Rds=1.2E8 IS=5p Bv=60 Ibv=10u Tt=161.6n 
 
+
 M1 5 8 0 0 BS170
 M2 6 7 0 0 BS170 
 
@@ -35,16 +36,18 @@ K10 L4 L5 1.0
 
 * Input                 * <--- Vm
 Rg 1 4 1m
-Vin 1 0 SIN(0 15 15e3 0 0 0)
-*Cp 1 0 100n
-*Rp 1 0 50
+*Vin 1 0 SIN(0 15 15e3 0 0 0)
+Cp 1 0 100n
+Rp 1 0 50
 
 * Output at 4
 
 .options savecurrents
 .control
+.save @Rg[i] 
 tran 0.0001m 10m 0.1m
 run
 plot v(4)
 plot @L3[i] @L4[i]
 plot -i(Vin) vs v(4)
+plot @Rg[i] vs v(4)
