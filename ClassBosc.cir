@@ -1,0 +1,52 @@
+* Class B based oscillator circuit
+
+
+.include IRF1010N.cir
+
+.model BS170 NMOS VTO=1.824 RG=270 RS=1.572 RD=1.436 RB=.768 KP=.1233 Cgdmax=20p Cgdmin=3p CGS=28p Cjo=35p Rds=1.2E8 IS=5p Bv=60 Ibv=10u Tt=161.6n 
+
+M1 5 8 0 0 BS170
+M2 6 7 0 0 BS170 
+
+Vgg 3 0 DC 2.82
+Vdd 2 0 DC 12.0
+
+.param Lind = 5m
+.param n = 1.0
+
+L1 7 3 {n*Lind}
+L2 3 8 {n*Lind}
+L3 2 6 Lind
+L4 5 2 Lind
+L5 4 0 Lind
+
+K1 L1 L2 1.0
+K2 L1 L3 1.0
+K3 L1 L4 1.0
+K4 L1 L5 1.0
+K5 L2 L3 1.0
+K6 L2 L4 1.0 
+K7 L2 L5 1.0
+K8 L3 L4 1.0
+K9 L3 L5 1.0
+K10 L4 L5 1.0
+
+* Load resistor 
+
+* Input                 * <--- Vm
+Vin 0 1 SIN(0 10 15e3 0 0 0)
+Rg 1 4 1m
+*Rg 4 1 1m
+*Cp 1 0 100n
+*Rp 1 0 5
+
+* Output at 4
+
+* .ic v(4) = 1m
+.options savecurrents
+.control
+tran 0.0001m 10m 0.1m
+run
+plot v(4)
+plot -i(Vin) vs v(4)
+plot @L3[i] @L4[i]

@@ -1,0 +1,14 @@
+* Negative resistance
+ 
+*R 1 0 -50
+L 1 0 1m
+
+Rg 1 2 50
+Vg 2 0 DC 0 SIN(0 1 15e3)
+
+.control
+
+tran 0.0001m 0.2m 0.0m
+run
+
+plot v(2) v(1) 
