@@ -8,11 +8,11 @@
 M1 5 8 0 0 BS170
 M2 6 7 0 0 BS170 
 
-Vgg 3 0 DC 2.82
+Vgg 3 0 DC 2.50
 Vdd 2 0 DC 12.0
 
 .param Lind = 5m
-.param n = 1.0
+.param n = 0.5
 
 L1 7 3 {n*Lind}
 L2 3 8 {n*Lind}
@@ -34,19 +34,17 @@ K10 L4 L5 1.0
 * Load resistor 
 
 * Input                 * <--- Vm
-Vin 0 1 SIN(0 10 15e3 0 0 0)
 Rg 1 4 1m
-*Rg 4 1 1m
+Vin 1 0 SIN(0 15 15e3 0 0 0)
 *Cp 1 0 100n
-*Rp 1 0 5
+*Rp 1 0 50
 
 * Output at 4
 
-* .ic v(4) = 1m
 .options savecurrents
 .control
 tran 0.0001m 10m 0.1m
 run
 plot v(4)
-plot -i(Vin) vs v(4)
 plot @L3[i] @L4[i]
+plot -i(Vin) vs v(4)
